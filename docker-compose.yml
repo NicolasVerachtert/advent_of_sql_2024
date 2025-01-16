@@ -1,0 +1,12 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: advent_postgres_${DAY}
+    ports:
+      - "54321:5432"
+    environment:
+      POSTGRES_USER: advent_user
+      POSTGRES_PASSWORD: advent_password
+      POSTGRES_DB: advent_db
+    volumes:
+      - ./${DATA_FILE}:/docker-entrypoint-initdb.d/data.sql:ro
