@@ -1,6 +1,5 @@
 WITH RECURSIVE
     rec AS (
-        -- SELECT staff_id, staff_name, manager_id, 
         SELECT
             staff_id,
             staff_name,
@@ -10,12 +9,14 @@ WITH RECURSIVE
             staff
         WHERE
             manager_id IS NULL
+            
         UNION ALL
-        -- SELECT s.staff_id, s.staff_name, s.manager_id, ARRAY_APPEND(r.path, s.staff_id) as path
+
         SELECT
             s.staff_id,
             s.staff_name,
-            s.manager_id
+            s.manager_id,
+            ARRAY_APPEND(r.path, s.staff_id) as path
         FROM
             staff s
             JOIN rec r ON s.manager_id = r.staff_id
